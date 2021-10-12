@@ -98,7 +98,7 @@ else:
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'kylemitt',
             'USER': 'mycall',
-            'PASSWORD': 'password',
+            'PASSWORD': 'password123P',
             'HOST': 'localhost',
             'PORT': '',
         }
