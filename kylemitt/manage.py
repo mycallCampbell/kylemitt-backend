@@ -11,7 +11,7 @@ def main():
                           'kylemitt.settings.development')
 
     if os.getenv('DJANGO_SETTINGS_MODULE'):
-        os.environ['DANGO_SETINGS_MODULE'] = os.getenv(
+        os.environ['DJANGO_SETINGS_MODULE'] = os.getenv(
             'DJANGO_SETTINGS_MODULE')
     try:
         from django.core.management import execute_from_command_line
