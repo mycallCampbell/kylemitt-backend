@@ -12,7 +12,6 @@ class Product(models.Model):
     sku = models.CharField(max_length=200, null=True, blank=True)
     image = models.CharField(max_length=200, null=True, blank=True)
     imageAmount = models.CharField(max_length=200, null=True, blank=True)
-    videoAmount = models.CharField(max_length=200, null=True, blank=True)
     videoWidth = models.IntegerField(null=True, blank=True, default=0)
     videoHeight = models.IntegerField(null=True, blank=True, default=0)
     itemSize = models.CharField(max_length=200, null=True, blank=True)
