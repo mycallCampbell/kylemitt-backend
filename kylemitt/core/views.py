@@ -64,10 +64,19 @@ def getRoutes(request):
 #     serializer = UserSerializer(user, many=False)
 #     return Response(serializer.data)
 
+# Rings Product View
+@api_view(['GET'])
+def getProductsRing(request):
+    products = Product.objects.filter(category__contains='ring')
+    serializer = ProductsSerializer(products, many=True)
+    return Response(serializer.data)
+
+
+# Bangle Product View
 
 @api_view(['GET'])
-def getProducts(request):
-    products = Product.objects.all()
+def getProductsBangle(request):
+    products = Product.objects.filter(category__contains='bangle')
     serializer = ProductsSerializer(products, many=True)
     return Response(serializer.data)
 
