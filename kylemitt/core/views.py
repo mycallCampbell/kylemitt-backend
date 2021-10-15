@@ -153,7 +153,6 @@ def getClientSecret(request):
         product = Product.objects.get(sku=i['sku'])
         productPriceList.append(product.price)
     productTotal = reduce(prod, productPriceList)
-    print(productTotal)
     intent = stripe.PaymentIntent.create(
         amount=productTotal,
         currency='gbp',

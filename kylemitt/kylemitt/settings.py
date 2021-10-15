@@ -26,9 +26,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY')
 
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['165.22.126.182', '127.0.0.1']
+ALLOWED_HOSTS = ['165.22.126.182', '127.0.0.1', 'www.kylemitt-be.co.uk']
 
 
 # Application definition
