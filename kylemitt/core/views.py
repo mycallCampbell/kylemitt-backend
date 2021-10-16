@@ -11,30 +11,12 @@ from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 from functools import reduce
 
-# from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-# from rest_framework_simplejwt.views import TokenObtainPairView
-
 stripe.api_key = settings.STRIPE_PRIVATE_KEY
 
+
 # For the reduce function
-
-
 def prod(x, y):
     return x + y
-
-
-# class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
-#     def validate(self, attrs):
-#         data = super().validate(attrs)
-
-#         data['username'] = self.user.username
-#         data['email'] = self.user.email
-
-#         return data
-
-
-# class MyTokenObtainPairView(TokenObtainPairView):
-#     serializer_class = MyTokenObtainPairSerializer
 
 
 @api_view(['GET'])
@@ -57,12 +39,6 @@ def getRoutes(request):
 
     return Response(routes)
 
-
-# @api_view(['GET'])
-# def getUserProfile(request):
-#     user = request.user
-#     serializer = UserSerializer(user, many=False)
-#     return Response(serializer.data)
 
 # Rings Product View
 @api_view(['GET'])
@@ -88,7 +64,8 @@ def getProduct(request, pk):
     return Response(serializer.data)
 
 
-productTotal = 20
+# Global Variable used for addOrderItems and updated by getclientSecret
+productTotal = 0
 
 
 @api_view(['POST'])
@@ -105,9 +82,6 @@ def addOrderItems(request):
             shippingPrice = 2.99
         totalPrice = shippingPrice + productTotal
         totalPrice = round(totalPrice, 2)
-        # print(totalPrice)  Working
-        # print(data['deliveryDetails']['addressLine1']) Working
-
         # Order.objects.all().delete()
         # ShippingAddress.objects.all().delete()
         order = Order.objects.create(
@@ -145,12 +119,10 @@ def addOrderItems(request):
 @api_view(['POST'])
 def getClientSecret(request):
 
-    list = []
     productPriceList = []
     data = request.data
     for i in data:
-        list.append(i['sku'])
-        product = Product.objects.get(sku=i['sku'])
+        product = Product.objects.get(_id=i['_id'])
         productPriceList.append(product.price)
     productTotal = reduce(prod, productPriceList)
     intent = stripe.PaymentIntent.create(
@@ -163,7 +135,6 @@ def getClientSecret(request):
     })
 
 
-# @csrf_exempt
 @api_view(['POST'])
 def stripe_webhook(request):
     payload = request.body
