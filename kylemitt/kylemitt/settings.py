@@ -28,7 +28,8 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['165.22.126.182', '127.0.0.1', 'www.kylemitt-be.co.uk']
+ALLOWED_HOSTS = ['165.22.126.182', '127.0.0.1',
+                 'www.kylemitt-be.co.uk', 'kylemitt-be.co.uk']
 
 
 # Application definition
