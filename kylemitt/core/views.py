@@ -47,12 +47,48 @@ def getProductsRing(request):
     serializer = ProductsSerializer(products, many=True)
     return Response(serializer.data)
 
+# Necklace Product view
+
+
+@api_view(['GET'])
+def getProductsNecklace(request):
+    products = Product.objects.filter(category__contains='necklace')
+    serializer = ProductsSerializer(products, many=True)
+    return Response(serializer.data)
+
+# Earring Product View
+
+
+@api_view(['GET'])
+def getProductsEarring(request):
+    products = Product.objects.filter(category__contains='earring')
+    serializer = ProductsSerializer(products, many=True)
+    return Response(serializer.data)
 
 # Bangle Product View
+
 
 @api_view(['GET'])
 def getProductsBangle(request):
     products = Product.objects.filter(category__contains='bangle')
+    serializer = ProductsSerializer(products, many=True)
+    return Response(serializer.data)
+
+# Bracelet Product View
+
+
+@api_view(['GET'])
+def getProductsBracelet(request):
+    products = Product.objects.filter(category__contains='bracelet')
+    serializer = ProductsSerializer(products, many=True)
+    return Response(serializer.data)
+
+# Chain Product View
+
+
+@api_view(['GET'])
+def getProductsChain(request):
+    products = Product.objects.filter(category__contains='chain')
     serializer = ProductsSerializer(products, many=True)
     return Response(serializer.data)
 
@@ -65,9 +101,10 @@ def getProduct(request, pk):
 
 
 # Global Variable used for addOrderItems and updated by getclientSecret
-productTotal = 0
+productTotal = 100  # Stripe issues paymetns in Cents/ Pennies
 
 
+# Adding Succesful Order to backend Model
 @api_view(['POST'])
 def addOrderItems(request):
 
@@ -125,14 +162,18 @@ def getClientSecret(request):
         product = Product.objects.get(_id=i['_id'])
         productPriceList.append(product.price)
     productTotal = reduce(prod, productPriceList)
-    intent = stripe.PaymentIntent.create(
-        amount=productTotal,
-        currency='gbp',
-        metadata={'integration_check': 'accept_a_payment'},
-    )
-    return JsonResponse({
-        'client_secret': intent.client_secret
-    })
+    try:
+        intent = stripe.PaymentIntent.create(
+            amount=productTotal,
+            currency='gbp',
+            metadata={'integration_check': 'accept_a_payment'},
+        )
+        return JsonResponse({
+            'client_secret': intent.client_secret
+        })
+
+    except:
+        return Response({'Details': 'Server Error....'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 @api_view(['POST'])
