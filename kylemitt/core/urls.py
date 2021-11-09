@@ -6,7 +6,7 @@ urlpatterns = [
     #      name='token_obtain_pair'),
     path('', views.getRoutes, name='routes'),
     # path('users/profile', views.getUserProfile, name='user-profile'),
-    path('product-collection/', views.getProductsCollection,
+    path('products-collection/', views.getProductsCollection,
          name='product-collection'),
     path('products-ring/', views.getProductsRing, name='products-ring'),
     path('products-bangle/', views.getProductsBangle, name='products-bangle'),
