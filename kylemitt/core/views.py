@@ -40,6 +40,13 @@ def getRoutes(request):
     return Response(routes)
 
 
+@api_view(['GET'])
+def getProductsCollection(request):
+    products = Product.objects.filter(collection__contains='collection')
+    serializer = ProductsSerializer(products, many=True)
+    return Response(serializer.data)
+
+
 # Rings Product View
 @api_view(['GET'])
 def getProductsRing(request):
