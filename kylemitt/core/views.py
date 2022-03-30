@@ -50,7 +50,7 @@ def getProductsCollection(request):
 # Rings Product View
 @api_view(['GET'])
 def getProductsRing(request):
-    products = Product.objects.filter(category__contains='ring')
+    products = Product.objects.filter(category="ring")
     serializer = ProductsSerializer(products, many=True)
     return Response(serializer.data)
 
@@ -59,7 +59,7 @@ def getProductsRing(request):
 
 @api_view(['GET'])
 def getProductsNecklace(request):
-    products = Product.objects.filter(category__contains='necklace')
+    products = Product.objects.filter(category='necklace')
     serializer = ProductsSerializer(products, many=True)
     return Response(serializer.data)
 
@@ -68,7 +68,7 @@ def getProductsNecklace(request):
 
 @api_view(['GET'])
 def getProductsEarring(request):
-    products = Product.objects.filter(category__contains='earring')
+    products = Product.objects.filter(category='earring')
     serializer = ProductsSerializer(products, many=True)
     return Response(serializer.data)
 
@@ -77,7 +77,7 @@ def getProductsEarring(request):
 
 @api_view(['GET'])
 def getProductsBangle(request):
-    products = Product.objects.filter(category__contains='bangle')
+    products = Product.objects.filter(category='bangle')
     serializer = ProductsSerializer(products, many=True)
     return Response(serializer.data)
 
@@ -86,7 +86,7 @@ def getProductsBangle(request):
 
 @api_view(['GET'])
 def getProductsBracelet(request):
-    products = Product.objects.filter(category__contains='bracelet')
+    products = Product.objects.filter(category='bracelet')
     serializer = ProductsSerializer(products, many=True)
     return Response(serializer.data)
 
@@ -95,7 +95,7 @@ def getProductsBracelet(request):
 
 @api_view(['GET'])
 def getProductsChain(request):
-    products = Product.objects.filter(category__contains='chain')
+    products = Product.objects.filter(category='chain')
     serializer = ProductsSerializer(products, many=True)
     return Response(serializer.data)
 
