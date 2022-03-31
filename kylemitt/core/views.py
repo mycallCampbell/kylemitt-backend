@@ -42,7 +42,7 @@ def getRoutes(request):
 
 @api_view(['GET'])
 def getProductsCollection(request):
-    products = Product.objects.filter(collection__contains='collection')
+    products = Product.objects.filter(collection='true')
     serializer = ProductsSerializer(products, many=True)
     return Response(serializer.data)
 
