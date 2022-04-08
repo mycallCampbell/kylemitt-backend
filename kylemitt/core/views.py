@@ -130,11 +130,13 @@ def addOrderItems(request):
         # totalPrice = round(totalPrice, 2)
         # Order.objects.all().delete()
         # ShippingAddress.objects.all().delete()
-        order = Order.objects.create(
-            shippingPrice=shippingPrice,
-            taxPrice=data['cartStorage']['size'],
-            totalPrice=data['cartStorage']['discountPrice'],
-        )
+        for i in data['cartStorage']:
+
+            order = Order.objects.create(
+                shippingPrice=shippingPrice,
+                taxPrice=i['size'],
+                totalPrice=i['discountPrice'],
+            )
 
         shipping = ShippingAddress.objects.create(
             order=order,
