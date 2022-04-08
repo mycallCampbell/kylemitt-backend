@@ -7,6 +7,7 @@ from rest_framework import status
 from .models import Product, Order, OrderItem, ShippingAddress
 from .serializer import ProductsSerializer
 import stripe
+import math
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 from functools import reduce
@@ -170,7 +171,9 @@ def getClientSecret(request):
         product = Product.objects.get(_id=i['_id'])
         productPriceList.append(product.price)
     productTotal = reduce(prod, productPriceList)
-    totalPrice = (productTotal / 100) * 80
+    divideBy100 = productTotal / 100
+    multiplyByDiscount = divideBy100 * 80
+    totalPrice = math.floor(multiplyByDiscount)
     print(totalPrice)
     try:
         intent = stripe.PaymentIntent.create(
