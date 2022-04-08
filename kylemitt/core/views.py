@@ -177,7 +177,7 @@ def getClientSecret(request):
     divideBy100 = productTotal / 100
     multiplyByDiscount = divideBy100 * 80
     mathFloorPrice = math.floor(multiplyByDiscount)
-    totalPrice = mathFloorPrice
+    totalPrice = mathFloorPrice * 100
 
     try:
         intent = stripe.PaymentIntent.create(
