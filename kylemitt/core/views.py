@@ -132,7 +132,7 @@ def addOrderItems(request):
         # ShippingAddress.objects.all().delete()
         order = Order.objects.create(
             shippingPrice=shippingPrice,
-            totalPrice=data['discountPrice'],
+            totalPrice=data['cartStorage']['discountPrice'],
         )
 
         shipping = ShippingAddress.objects.create(
@@ -174,7 +174,7 @@ def getClientSecret(request):
     divideBy100 = productTotal / 100
     multiplyByDiscount = divideBy100 * 80
     mathFloorPrice = math.floor(multiplyByDiscount)
-    totalPrice = mathFloorPrice * 10
+    totalPrice = mathFloorPrice
 
     try:
         intent = stripe.PaymentIntent.create(
