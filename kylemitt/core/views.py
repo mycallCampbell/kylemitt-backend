@@ -110,7 +110,7 @@ def getProduct(request, pk):
 
 
 # Global Variable used for addOrderItems and updated by getclientSecret
-productTotal = 1000  # Stripe issues paymetns in Cents/ Pennies
+productTotal = 0  # Stripe issues paymetns in Cents/ Pennies
 
 
 # Adding Succesful Order to backend Model
@@ -173,8 +173,9 @@ def getClientSecret(request):
     productTotal = reduce(prod, productPriceList)
     divideBy100 = productTotal / 100
     multiplyByDiscount = divideBy100 * 80
-    totalPrice = math.floor(multiplyByDiscount)
-    print(totalPrice)
+    mathFloorPrice = math.floor(multiplyByDiscount)
+    totalPrice = mathFloorPrice * 10
+
     try:
         intent = stripe.PaymentIntent.create(
             amount=totalPrice,
