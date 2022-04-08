@@ -170,8 +170,8 @@ def getClientSecret(request):
         product = Product.objects.get(_id=i['_id'])
         productPriceList.append(product.price)
     productTotal = reduce(prod, productPriceList)
-    totalPrice = productTotal / 100 * 80
-    print(10000)
+    totalPrice = (productTotal / 100) * 80
+    print(totalPrice)
     try:
         intent = stripe.PaymentIntent.create(
             amount=totalPrice,
