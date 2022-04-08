@@ -110,7 +110,7 @@ def getProduct(request, pk):
 
 
 # Global Variable used for addOrderItems and updated by getclientSecret
-productTotal = 0  # Stripe issues paymetns in Cents/ Pennies
+# Stripe issues paymetns in Cents/ Pennies
 
 
 # Adding Succesful Order to backend Model
@@ -126,13 +126,13 @@ def addOrderItems(request):
             shippingPrice = 5.99
         else:
             shippingPrice = 0
-        totalPrice = shippingPrice + productTotal
-        totalPrice = round(totalPrice, 2)
+        # totalPrice = shippingPrice + productTotal
+        # totalPrice = round(totalPrice, 2)
         # Order.objects.all().delete()
         # ShippingAddress.objects.all().delete()
         order = Order.objects.create(
             shippingPrice=shippingPrice,
-            totalPrice=totalPrice,
+            totalPrice=data['discountPrice'],
         )
 
         shipping = ShippingAddress.objects.create(
