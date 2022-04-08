@@ -109,7 +109,7 @@ def getProduct(request, pk):
 
 
 # Global Variable used for addOrderItems and updated by getclientSecret
-productTotal = 100  # Stripe issues paymetns in Cents/ Pennies
+productTotal = 10000  # Stripe issues paymetns in Cents/ Pennies
 
 
 # Adding Succesful Order to backend Model
