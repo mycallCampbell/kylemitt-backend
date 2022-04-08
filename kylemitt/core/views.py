@@ -134,7 +134,6 @@ def addOrderItems(request):
 
             order = Order.objects.create(
                 shippingPrice=shippingPrice,
-                taxPrice=i['size'],
                 totalPrice=i['discountPrice'],
             )
 
