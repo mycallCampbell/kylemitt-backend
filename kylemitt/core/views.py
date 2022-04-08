@@ -10,6 +10,7 @@ import stripe
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 from functools import reduce
+from django.core.mail import send_mail, BadHeaderError
 
 stripe.api_key = settings.STRIPE_PRIVATE_KEY
 
@@ -123,7 +124,7 @@ def addOrderItems(request):
         if shippingPrice != 'Standard':
             shippingPrice = 5.99
         else:
-            shippingPrice = 2.99
+            shippingPrice = 0
         totalPrice = shippingPrice + productTotal
         totalPrice = round(totalPrice, 2)
         # Order.objects.all().delete()
@@ -202,3 +203,29 @@ def stripe_webhook(request):
         print(session)
 
     return HttpResponse(status=200)
+
+
+@api_view(["POST"])
+def sendEmail(request):
+    # Convert List to String to comply with django Send_mail module
+    s = [
+        request.data["firstName"],
+        request.data["sureName"],
+        request.data["phone"],
+        request.data["email"],
+        request.data["message"],
+    ]
+    listToString = " ".join(map(str, s))
+    # print(listToString)
+
+    try:
+        send_mail(
+            "Contact Enquiry",
+            listToString,
+            "contact@kylemitt.com",
+            ["contact@kylemitt.com"],
+            fail_silently=False,
+        )
+    except BadHeaderError:
+        return HttpResponse("Invalid header found.")
+    return Response("Success")

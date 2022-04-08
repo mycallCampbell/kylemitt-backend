@@ -141,6 +141,17 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 # change in production
 CORS_ALLOW_ALL_ORIGINS = True
 
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_PORT = os.getenv("EMAIL_PORT")
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+RECIPIENT_ADDRESS = os.getenv("RECIPIENT_ADDRESS")
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
