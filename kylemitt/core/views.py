@@ -154,6 +154,7 @@ def addOrderItems(request):
                 product=product,
                 order=order,
                 name=product.name,
+                size=i['size'],
             )
 
             product.countInStock -= 1
