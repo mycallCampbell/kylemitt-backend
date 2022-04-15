@@ -18,4 +18,5 @@ urlpatterns = [
     path('client-secret/', views.getClientSecret, name='client-secret'),
     path('webhook/stripe', views.stripe_webhook, name='stripe-webhook'),
     path('addorder/', views.addOrderItems, name='add-order'),
+    path('sendEmail', views.sendEmail, name='send-email'),
 ]
