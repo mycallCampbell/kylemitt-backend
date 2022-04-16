@@ -225,7 +225,7 @@ def sendEmail(request):
         request.data["message"],
     ]
     listToString = " ".join(map(str, s))
-    # print(listToString)
+    print(listToString)
 
     try:
         send_mail(
