@@ -161,19 +161,19 @@ def addOrderItems(request):
             product.countInStock -= 1
             product.save()
         
-        now = datetime.now()
-        dataAndTime = str(now)
-        try:
-        send_mail(
-            "Product Purhcase",
-            dataAndTime,
-            "contact@kylemitt.com",
-            ["contact@kylemitt.com"],
-            fail_silently=False,
-        )
-        except BadHeaderError:
-            return HttpResponse("Invalid header found.")
-        return Response("Success")
+        # now = datetime.now()
+        # dataAndTime = str(now)
+        # try:
+        # send_mail(
+        #     "Product Purhcase",
+        #     dataAndTime,
+        #     "contact@kylemitt.com",
+        #     ["contact@kylemitt.com"],
+        #     fail_silently=False,
+        # )
+        # except BadHeaderError:
+        #     return HttpResponse("Invalid header found.")
+        # return Response("Success")
 
     print(data['deliveryDetails']['addressLine1'])
 
