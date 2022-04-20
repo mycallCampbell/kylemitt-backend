@@ -12,6 +12,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 from functools import reduce
 from django.core.mail import send_mail, BadHeaderError
+from datetime import datetime
 
 stripe.api_key = settings.STRIPE_PRIVATE_KEY
 
@@ -159,6 +160,20 @@ def addOrderItems(request):
 
             product.countInStock -= 1
             product.save()
+        
+        now = datetime.now()
+        dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+        try:
+        send_mail(
+            "Product Purhcase",
+            dt_string,
+            "contact@kylemitt.com",
+            ["contact@kylemitt.com"],
+            fail_silently=False,
+        )
+        except BadHeaderError:
+            return HttpResponse("Invalid header found.")
+        return Response("Success")
 
     print(data['deliveryDetails']['addressLine1'])
 
