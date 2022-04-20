@@ -266,7 +266,7 @@ def sendPurchaseEmail(request):
             "Order Placement",
             dataAndTime,
             "contact@kylemitt.com",
-            ["contact@kylemitt.com"],
+            ["contact@kylemitt.com","devmycall@gmail.com"],
             fail_silently=False,
         )
     except BadHeaderError:
