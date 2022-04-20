@@ -19,4 +19,5 @@ urlpatterns = [
     path('webhook/stripe', views.stripe_webhook, name='stripe-webhook'),
     path('addorder/', views.addOrderItems, name='add-order'),
     path('sendEmail/', views.sendEmail, name='send-email'),
+    path('sendPurchaseEmail/', views.sendPurchaseEmail, name='purchaseEmail'),
 ]

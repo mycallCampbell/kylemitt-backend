@@ -253,3 +253,22 @@ def sendEmail(request):
     except BadHeaderError:
         return HttpResponse("Invalid header found.")
     return Response("Success")
+
+
+@api_view(['GET'])
+def sendPurchaseEmail(request):
+
+    now = datetime.now()
+    dataAndTime = str(now)
+
+    try:
+        send_mail(
+            "Order Placement",
+            dataAndTime,
+            "contact@kylemitt.com",
+            ["contact@kylemitt.com"],
+            fail_silently=False,
+        )
+    except BadHeaderError:
+        return HttpResponse("Invalid header found.")
+    return Response("Success")
