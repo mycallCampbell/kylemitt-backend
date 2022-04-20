@@ -177,7 +177,7 @@ def addOrderItems(request):
 
     print(data['deliveryDetails']['addressLine1'])
 
-    return HttpResponse(status=200)
+    return Response('Success')
 
 
 @api_view(['POST'])
