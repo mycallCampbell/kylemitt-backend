@@ -272,3 +272,12 @@ def sendPurchaseEmail(request):
     except BadHeaderError:
         return HttpResponse("Invalid header found.")
     return Response("Success")
+
+@api_view(['POST'])
+def subscribe(request):
+
+    data = request.data
+    SubscriberList.objects.create(
+        email = data['email']
+    )
+    return Response('Success')

@@ -94,3 +94,12 @@ class ShippingAddress(models.Model):
 
     def __str__(self):
         return str(self.addressLine1)
+
+
+
+class SubscriberList(models.Model):
+    email = models.CharField(max_length=200, null=True, blank=True)
+
+    def __str__(self):
+        return str(self.email)
+
